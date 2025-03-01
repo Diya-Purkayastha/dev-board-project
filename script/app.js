@@ -33,19 +33,20 @@ for(let i = 0; i < button.length; i++){
     btn.addEventListener("click" , function(event){
         event.preventDefault();
             window.alert("board uploaded successfully")
+          
         const taskAssignedNo = getConvertedById("task-assigned-no");
         const totalTaskNo = getConvertedById("total-task-no");
        
         document.getElementById("task-assigned-no").innerText = taskAssignedNo - 1;
         document.getElementById("total-task-no").innerText = totalTaskNo +1 ;
-        
-        
+        if(taskAssignedNo == 0){
+            alert("Congratulations!! your all task is completed.")
+        }
+
+        //title accessing 
         const card = event.target.closest(".card"); 
-        
         if (card) {
-            const title = card.querySelector(".title-card").innerText;
-            console.log(title);
-       
+            const title = card.querySelector(".title-card").innerText;       
             //appending p tag
             const historyDiv = document.getElementById("history");
             const p = document.createElement("p");
@@ -57,6 +58,8 @@ for(let i = 0; i < button.length; i++){
         
         btn.disabled = true;
     })
+
+  
 
 }
 
