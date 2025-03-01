@@ -1,4 +1,11 @@
 
+//redirecting page
+document.getElementById("discover-container").addEventListener("click", function(event){
+    event.preventDefault();
+    window.location.href = "./blog.html"
+})
+
+
 // date
 const currentDate = new Date().toDateString();
 const dateDiv = document.getElementById("current-date");
