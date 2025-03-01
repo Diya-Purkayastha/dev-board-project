@@ -7,16 +7,27 @@ p.innerText = currentDate;
 dateDiv.appendChild(p);
 
 //time
-function getCurrentTime(){
-    const date = new Date();
-    const hours = ((date.getUTCHours() + 6) % 24).toString().padStart(2, '0');
-    const minute = date.getMinutes().toString().padStart(2,0);
-    const second = date.getSeconds().toString().padStart(2,0);
-    return `${hours}:${minute}:${second}`;
-    // return date.toLocaleTimeString("en-US", { hour12: false }); 
-  
+function getCurrentTime(){ 
+     return new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
 }
 
+
+//removing elements 
+document.getElementById("history-btn").addEventListener("click" , function (event){
+    document.getElementById("history").innerHTML=" ";
+  
+
+})
+
+//bg color change
+function randomColor(){
+    let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    return randomColor;
+}
+let bgColor = document.getElementById("bg-color");
+bgColor.addEventListener("click" , function(){
+    document.body.style.backgroundColor = randomColor();
+})
 
 //converting function 
 function getConvertedById(id){
@@ -32,16 +43,13 @@ for(let i = 0; i < button.length; i++){
 
     btn.addEventListener("click" , function(event){
         event.preventDefault();
-            window.alert("board uploaded successfully")
+            window.alert("Board updated Successfully")
           
-        const taskAssignedNo = getConvertedById("task-assigned-no");
+        let taskAssignedNo = getConvertedById("task-assigned-no");
         const totalTaskNo = getConvertedById("total-task-no");
        
         document.getElementById("task-assigned-no").innerText = taskAssignedNo - 1;
-        document.getElementById("total-task-no").innerText = totalTaskNo +1 ;
-        if(taskAssignedNo == 0){
-            alert("Congratulations!! your all task is completed.")
-        }
+        document.getElementById("total-task-no").innerText = totalTaskNo + 1 ;
 
         //title accessing 
         const card = event.target.closest(".card"); 
@@ -52,11 +60,16 @@ for(let i = 0; i < button.length; i++){
             const p = document.createElement("p");
             p.classList.add("bg-white" , "p-2", "rounded-lg");
             let time = getCurrentTime();
-            p.innerHTML = `<h1>You have completed the task ${title} at ${time} PM</h1>`;
+            p.innerHTML = `<h1>You have completed the task ${title} at ${time}</h1>`;
             historyDiv.appendChild(p);
         }
         
         btn.disabled = true;
+
+        if(taskAssignedNo === 1){
+            alert("Congratulations!! You have completed all the current task .")
+        }
+        
     })
 
   
@@ -64,21 +77,6 @@ for(let i = 0; i < button.length; i++){
 }
 
 
-    //removing elements 
-    document.getElementById("history-btn").addEventListener("click" , function (event){
-        document.getElementById("history").innerHTML=" ";
-      
 
-    })
-
-
-    //bg color change
-    function randomColor(){
-        let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-        return randomColor;
-    }
-    let bgColor = document.getElementById("bg-color");
-    bgColor.addEventListener("click" , function(){
-        document.body.style.backgroundColor = randomColor();
-    })
+    
 
